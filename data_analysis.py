@@ -6,6 +6,17 @@ from nltk.tokenize import TweetTokenizer
 import nltk
 import string
 
+
+def draw_freq_graph(word_list, title):
+    word_dist = nltk.FreqDist(word_list)
+    result = pd.DataFrame(word_dist.most_common(25), columns=['Word', 'Frequency']).set_index('Word')
+
+    matplotlib.style.use('ggplot')
+    result.plot.bar(rot=0)
+    plt.title(title)
+    plt.show()
+
+
 pd.set_option('display.max_columns', 5)
 
 data = pd.read_json('Sarcasm_Headlines_Dataset.json', lines=True)
@@ -26,11 +37,17 @@ for headline in headlines:
         if word not in stops and word not in string.punctuation:
             all_words.append(word)
 
-word_dist = nltk.FreqDist(all_words)
+draw_freq_graph(all_words, 'All Words')
 
-result = pd.DataFrame(word_dist.most_common(25), columns=['Word', 'Frequency']).set_index('Word')
-print(result)
+sarcastic = data[data.is_sarcastic == 1]
+factual = data[data.is_sarcastic == 0]
 
-matplotlib.style.use('ggplot')
-result.plot.bar(rot=0)
-plt.show()
+sar_headlines = sarcastic.apply(lambda row: tokenizer.tokenize(row['headline']), axis=1)
+fact_headlines = factual.apply(lambda row: tokenizer.tokenize(row['headline']), axis=1)
+
+# List of words in each category's headline that is not punctuation or a stopword
+sar_words = [word for headline in sar_headlines for word in headline if word not in stops and word not in string.punctuation]
+draw_freq_graph(sar_words, 'Sarcastic Words')
+
+fact_words = [word for headline in fact_headlines for word in headline if word not in stops and word not in string.punctuation]
+draw_freq_graph(fact_words, 'Factual Words')
