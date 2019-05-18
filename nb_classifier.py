@@ -5,6 +5,7 @@ from nltk import FreqDist
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression, SGDClassifier
 from sklearn.naive_bayes import GaussianNB, BernoulliNB, MultinomialNB
+from sklearn.ensemble import VotingClassifier
 
 from sklearn import metrics
 import numpy as np
@@ -65,26 +66,29 @@ print(len(val_x), len(val_y))
 gnb = GaussianNB()
 gnb.fit(train_x, train_y)
 gnb_pred_y = gnb.predict(val_x)
+print('GaussianNB Accuracy:', metrics.accuracy_score(val_y, gnb_pred_y))
 
 bern = BernoulliNB()
 bern.fit(train_x, train_y)
 bern_pred_y = bern.predict(val_x)
+print('BernoulliNB Accuracy:', metrics.accuracy_score(val_y, bern_pred_y))
 
 multi = MultinomialNB()
 multi.fit(train_x, train_y)
 multi_pred_y = multi.predict(val_x)
+print('MultinomialNB Accuracy:', metrics.accuracy_score(val_y, multi_pred_y))
 
 log = LogisticRegression()
 log.fit(train_x, train_y)
 log_pred_y = log.predict(val_x)
+print('Logistic Regression Accuracy:', metrics.accuracy_score(val_y, log_pred_y))
 
 sgd = SGDClassifier()
 sgd.fit(train_x, train_y)
 sgd_pred_y = sgd.predict(val_x)
-
-print('GaussianNB Accuracy:', metrics.accuracy_score(val_y, gnb_pred_y))
-print('BernoulliNB Accuracy:', metrics.accuracy_score(val_y, bern_pred_y))
-print('MultinomialNB Accuracy:', metrics.accuracy_score(val_y, multi_pred_y))
-print('Logistic Regression Accuracy:', metrics.accuracy_score(val_y, log_pred_y))
 print('SGDClassifier Accuracy:', metrics.accuracy_score(val_y, sgd_pred_y))
 
+vote = VotingClassifier([('gnb', gnb), ('bern', bern), ('multi', multi), ('lr', log), ('sgd', sgd)])
+vote.fit(train_x, train_y)
+vote_pred_y = vote.predict(val_x)
+print('Vote Accuracy:', metrics.accuracy_score(val_y, vote_pred_y))
