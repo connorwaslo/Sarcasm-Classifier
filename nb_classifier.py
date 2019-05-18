@@ -1,6 +1,7 @@
 import pandas as pd
 from nltk.corpus import stopwords
 from nltk.tokenize import TweetTokenizer
+from nltk.stem import WordNetLemmatizer
 from nltk import FreqDist
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression, SGDClassifier
@@ -13,14 +14,25 @@ import string
 
 data = pd.read_json('Sarcasm_Headlines_Dataset.json', lines=True)
 
+# Tokenize headlines and then lemmatize headlines
 tokenizer = TweetTokenizer()
+lemm = WordNetLemmatizer()
 headlines = data.apply(lambda row: tokenizer.tokenize(row['headline']), axis=1)
+lem_headlines = []
+for headline in headlines:
+    lem_head = []
+    for word in headline:
+        lem_head.append(lemm.lemmatize(word))
+    lem_headlines.append(lem_head)
+
+# headlines = data.apply(lambda row: (lemm.lemmatize(word) for word in row['headline']), axis=1)
 
 # Set of all stopwords
 stops = set(stopwords.words('english'))
 
 # Frequency of all words
-all_words = [word for headline in headlines for word in headline if word not in stops and word not in string.punctuation]
+all_words = [word for headline in lem_headlines for word in headline if word not in stops and word not in string.punctuation]
+
 word_dist = FreqDist(all_words)
 
 # features = []
@@ -52,7 +64,7 @@ def feature_vec(headline):
 
 
 features = []
-for headline in headlines:
+for headline in lem_headlines:
     features.append(feature_vec(headline))
 
 print(len(features), np.array(features).shape)
