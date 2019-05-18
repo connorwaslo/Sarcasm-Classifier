@@ -3,8 +3,9 @@ from nltk.corpus import stopwords
 from nltk.tokenize import TweetTokenizer
 from nltk import FreqDist
 from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.naive_bayes import GaussianNB
+from sklearn.linear_model import LogisticRegression, SGDClassifier
+from sklearn.naive_bayes import GaussianNB, BernoulliNB, MultinomialNB
+
 from sklearn import metrics
 import numpy as np
 import string
@@ -54,7 +55,6 @@ for headline in headlines:
     features.append(feature_vec(headline))
 
 print(len(features), np.array(features).shape)
-features = np.array(features)
 
 labels = data['is_sarcastic'].tolist()
 train_x, val_x, train_y, val_y = train_test_split(features, labels, test_size=0.2)
@@ -64,7 +64,27 @@ print(len(val_x), len(val_y))
 
 gnb = GaussianNB()
 gnb.fit(train_x, train_y)
-pred_y = gnb.predict(val_x)
+gnb_pred_y = gnb.predict(val_x)
 
-print('Accuracy:', metrics.accuracy_score(val_y, pred_y))
+bern = BernoulliNB()
+bern.fit(train_x, train_y)
+bern_pred_y = bern.predict(val_x)
+
+multi = MultinomialNB()
+multi.fit(train_x, train_y)
+multi_pred_y = multi.predict(val_x)
+
+log = LogisticRegression()
+log.fit(train_x, train_y)
+log_pred_y = log.predict(val_x)
+
+sgd = SGDClassifier()
+sgd.fit(train_x, train_y)
+sgd_pred_y = sgd.predict(val_x)
+
+print('GaussianNB Accuracy:', metrics.accuracy_score(val_y, gnb_pred_y))
+print('BernoulliNB Accuracy:', metrics.accuracy_score(val_y, bern_pred_y))
+print('MultinomialNB Accuracy:', metrics.accuracy_score(val_y, multi_pred_y))
+print('Logistic Regression Accuracy:', metrics.accuracy_score(val_y, log_pred_y))
+print('SGDClassifier Accuracy:', metrics.accuracy_score(val_y, sgd_pred_y))
 

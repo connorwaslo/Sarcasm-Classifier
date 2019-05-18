@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="149210ba-9019-488f-94db-c8f28ea77f83" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/nb_classifier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nb_classifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/nb_classifier.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,7 +12,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Sarcasm_Classifier$data_analysis.coverage" NAME="data_analysis Coverage Results" MODIFIED="1558195671610" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Sarcasm_Classifier$nb_classifier.coverage" NAME="nb_classifier Coverage Results" MODIFIED="1558201671561" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Sarcasm_Classifier$nb_classifier.coverage" NAME="nb_classifier Coverage Results" MODIFIED="1558202478257" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -32,8 +31,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nb_classifier.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="59" column="82" selection-start-line="59" selection-start-column="82" selection-end-line="59" selection-end-column="82" />
+            <state relative-caret-position="141">
+              <caret line="88" column="75" lean-forward="true" selection-start-line="88" selection-start-column="75" selection-end-line="88" selection-end-column="75" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -54,7 +53,13 @@
     <findStrings>
       <find>True</find>
       <find>1</find>
+      <find>bern</find>
+      <find>log</find>
     </findStrings>
+    <replaceStrings>
+      <replace>multi</replace>
+      <replace>sgd</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -176,12 +181,12 @@
       <option name="presentableId" value="Default" />
       <updated>1558156853453</updated>
       <workItem from="1558156887023" duration="5384000" />
-      <workItem from="1558194041424" duration="6278000" />
+      <workItem from="1558194041424" duration="7392000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11662000" />
+    <option name="totallyTimeSpent" value="12776000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1293" height="733" extended-state="6" />
@@ -284,8 +289,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/nb_classifier.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="59" column="82" selection-start-line="59" selection-start-column="82" selection-end-line="59" selection-end-column="82" />
+        <state relative-caret-position="141">
+          <caret line="88" column="75" lean-forward="true" selection-start-line="88" selection-start-column="75" selection-end-line="88" selection-end-column="75" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
