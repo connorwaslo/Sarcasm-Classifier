@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 from nltk.corpus import stopwords
 from nltk.tokenize import TweetTokenizer
+from nltk.stem import WordNetLemmatizer
 import nltk
 import string
 
@@ -51,3 +52,9 @@ draw_freq_graph(sar_words, 'Sarcastic Words')
 
 fact_words = [word for headline in fact_headlines for word in headline if word not in stops and word not in string.punctuation]
 draw_freq_graph(fact_words, 'Factual Words')
+
+lemmatizer = WordNetLemmatizer()
+lem_sar_words = [lemmatizer.lemmatize(word) for word in sar_words]
+lem_sar_freq = nltk.FreqDist(lem_sar_words)
+print(lem_sar_freq.most_common(25))
+draw_freq_graph(lem_sar_words, 'Lemmatized Sarcastic Words')
